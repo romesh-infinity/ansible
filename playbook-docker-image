@@ -1,0 +1,14 @@
+- name: upload the directory with Dockerfile/docker-compose file with all data in it to the docker host
+  synchronize: src=site dest=/tmp
+
+# using docker module in ansible
+- name: build the image
+  docker_image: >
+    name=built-by-ansible
+    tag=ex1
+    path=/tmp/site
+    state=present
+    
+# using command module to write docker command
+- name: build the image
+  command: docker build -t built-by-ansible:ex2 /tmp/site
